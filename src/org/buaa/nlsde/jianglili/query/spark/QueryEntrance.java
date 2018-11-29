@@ -1,5 +1,6 @@
 package org.buaa.nlsde.jianglili.query.spark;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -7,8 +8,16 @@ import java.util.List;
 import de.tf.uni.freiburg.sparkrdf.model.rdf.executionresults.IntermediateResultsModel;
 import de.tf.uni.freiburg.sparkrdf.parser.query.op.SparkOp;
 import de.tf.uni.freiburg.sparkrdf.sparql.operator.result.util.SolutionMapping;
+import jodd.io.FileUtil;
+import org.apache.commons.io.FileUtils;
 import org.buaa.nlsde.jianglili.cache.CachePool;
 import org.buaa.nlsde.jianglili.query.JenaMemory.lubm1;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.mortbay.jetty.HttpStatus;
+import org.mortbay.jetty.Request;
+import org.mortbay.jetty.Server;
+import org.mortbay.jetty.handler.AbstractHandler;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import de.tf.uni.freiburg.sparkrdf.constants.Const;
@@ -35,23 +44,87 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.jena.shared.PrefixMapping;
+import scala.tools.nsc.backend.icode.Opcodes;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import static jdk.nashorn.internal.objects.Global.println;
 
 
-public class QueryEntrance {
+public class QueryEntrance extends AbstractHandler {
+
+    public static String memOnEachCore;
+    public static int serverPort;
+    public static boolean localFlag = true;
 
     public static void main(String[] args)
-            throws OWLOntologyCreationException,
-                   OWLOntologyStorageException,
-                   FileNotFoundException,
-                   IOException
+            throws Exception
     {
+        //load config from file
+        JSONObject config = loadConfigFromFile(args[0]);
+        if(config==null){return;}
+
+        //setup cluster config
+        memOnEachCore = config.getString("MEMORY");
+        serverPort = Integer.parseInt(config.getString("PORT"));
+        localFlag = true;
+
+        //start server
+        Server server = new Server(serverPort);
+        server.setHandler(new QueryEntrance());
+        server.start();
+    }
+
+    public static JSONObject loadConfigFromFile(String configFile)
+            throws FileNotFoundException,IOException
+    {
+        JSONObject config = null;
+        try
+        {
+            String input = FileUtils.readFileToString(new File(configFile));
+            config = new JSONObject(input);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            config = null;
+        }
+
+        return config;
+    }
+
+
+    @Override
+    public void handle(String s,
+                       HttpServletRequest httpServletRequest,
+                       HttpServletResponse httpServletResponse,
+                       int i)
+            throws IOException,
+            ServletException{
+        //httpServletResponse.setContentType("text/html;charset=utf-8");
+        //httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+        //((Request)httpServletRequest).setHandled(true);
+        //httpServletResponse.getWriter().println("<h1>Hello World</h1>");
+
+
+        //get the url and parameters
+        String url = httpServletRequest.getRequestURI();
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+        httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+        httpServletResponse.setHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type,Accept,Origin");
+
+        // get the query parameter
+        String query = httpServletRequest.getParameter("q");
+        String data = httpServletRequest.getParameter("data");
 
         //parameter initialization
+        /*
         String instanceFile = args[0];
         String schemaFile = args[1];
         String queryFile = args[2];
-        String memOnEachCore = "3g";
-        Boolean localFlag = true;
+
 
         //rewrite or not
         Boolean rewriteFlag = args[3].charAt(0)=='1';
@@ -59,24 +132,34 @@ public class QueryEntrance {
         int limNum = Integer.parseInt(args[4]);
 
         //jena or s2xt
-        Boolean jenaFlag = Integer.parseInt(args[5])==1;
+        boolean jenaFlag = Integer.parseInt(args[5])==1;
         //cache pool or not
-        Boolean cachePoolFlag =Integer.parseInt(args[6])==1;
+        boolean cachePoolFlag =Integer.parseInt(args[6])==1;
 
 
         //不管重不重写，都需要初始化concept
-        Concept concept  = QueryRewrting.initSchema("file:"+schemaFile, 0);
+        try
+        {
+            Concept concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
 
-        if(jenaFlag)
-        {
-            Dataset instances =DatasetFactory.create(RDFDataMgr.loadModel(instanceFile));
-            querySparql(instances,concept,queryFile,rewriteFlag,limNum);
+            if (jenaFlag)
+            {
+                Dataset instances = DatasetFactory.create(RDFDataMgr.loadModel(instanceFile));
+                querySparql(instances, concept, queryFile, rewriteFlag, limNum);
+            }
+            else
+            {
+                initRuntimeEnvir(instanceFile, memOnEachCore, localFlag, schemaFile);
+                runSPARQLQuery(queryFile, concept, limNum, cachePoolFlag, rewriteFlag);
+            }
         }
-        else
+        catch(Exception e)
         {
-            initRuntimeEnvir(instanceFile,memOnEachCore,localFlag,schemaFile);
-            runSPARQLQuery(queryFile,concept,limNum,cachePoolFlag,rewriteFlag);
+
         }
+        */
+
+
     }
 
     private static void querySparql(Dataset instances,

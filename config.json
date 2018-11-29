@@ -1,0 +1,22 @@
+{
+  "PORT":8081,
+  "MEMORY":"3G",
+  "GRAPHS":{
+    "DBPEDIA":
+    {
+      "SCHEMA":"/path/to/dbpedia/schema",
+      "INSTANCE":
+      {
+        "BENCHMARK1":"/path/to/benchmark1"
+      }
+    },
+    "LUBM":
+    {
+      "SCHEMA":"/path/to/lubm/schema",
+      "INSTANCE":
+      {
+        "LUBM1":"/path/to/lubm1"
+      }
+    }
+  }
+}

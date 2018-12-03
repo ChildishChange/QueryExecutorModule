@@ -36,7 +36,7 @@ public class AxiomCollect extends OpVisitorBase {
         AlgebraWalker.walkBottomUp(this, op);
         //for each axiomvar change the op
         // store op var
-    //    System.out.println("size of axiomVar is "+axiomVar.size());
+        // System.out.println("size of axiomVar is "+axiomVar.size());
         for(Map.Entry<Var,List<Node>>  varEntry: axiomVar.entrySet()){
             if(op instanceof OpProject)
                 ((OpProject)op).getVars().remove(varEntry.getKey());

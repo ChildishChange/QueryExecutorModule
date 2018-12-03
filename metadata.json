@@ -1,0 +1,23 @@
+{
+  "equivalentCls":{
+    "<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Prqofessor>":"<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Teacher>",
+    "<212>":"<222>"
+
+  },
+  "equivalentPrp":{
+    "<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Professor>":"<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Teacher>",
+    "<2>":"<12>"
+  },
+  "sameas":{
+    "<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Profaessor>":"<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Teacher>"
+  },
+  "subCls":{
+    "<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Professor>":[
+      "<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Chair>",
+      "<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Dean>",
+      "<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#AssistantProfessor>"]
+  },
+  "subPrp":{
+    "<111>":["<111>","<222>"]
+  }
+}

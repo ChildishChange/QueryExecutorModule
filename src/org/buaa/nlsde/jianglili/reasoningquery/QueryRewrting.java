@@ -35,7 +35,9 @@ public class QueryRewrting {
     }
 
     public static Concept initSchema( String schemafile, int tag)
-            throws OWLOntologyCreationException, OWLOntologyStorageException, FileNotFoundException {
+            throws OWLOntologyCreationException,
+                   OWLOntologyStorageException,
+                   FileNotFoundException {
         OWLOntology ontology= ConceptUtil.getSchema(schemafile);
         //get all concrete and (class or properties)
         Concept concept=new Concept();
@@ -47,7 +49,9 @@ public class QueryRewrting {
 
     }
     public static Op transform( Op op, Concept concept,int limitation)
-            throws OWLOntologyCreationException, OWLOntologyStorageException, FileNotFoundException {
+            throws OWLOntologyCreationException,
+                   OWLOntologyStorageException,
+                   FileNotFoundException {
         return new AlgebraTransformer(concept,true,limitation).BothTransform(op);
     }
 

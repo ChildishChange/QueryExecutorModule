@@ -5,6 +5,7 @@ import de.tf.uni.freiburg.sparkrdf.sparql.operator.result.util.SolutionMapping;
 import org.apache.log4j.Logger;
 import org.apache.spark.rdd.RDD;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -119,6 +120,7 @@ public class IntermediateResultsModel {
         }
         return null;
     }
+    /*
     public List<SolutionMapping> getFinalResultAsList() {
         if (results.size() > 1) {
             throw new UnsupportedOperationException(
@@ -137,5 +139,25 @@ public class IntermediateResultsModel {
             }
         }
         return null;
+    }
+    */
+    public List<SolutionMapping> getFinalResultAsList() {
+        if (results.size() > 1) {
+            throw new UnsupportedOperationException(
+                    "Model contains more than one result, so no final result found");
+        } else {
+            Iterator var1 = results.entrySet().iterator();
+            if(var1.hasNext())
+            {
+                Entry<Integer, RDDVariablePair> entry = (Entry)var1.next();
+                RDD<SolutionMapping> solutionMappingRDD = ((RDDVariablePair)entry.getValue()).getRdd();
+                return solutionMappingRDD == null? null : solutionMappingRDD.toJavaRDD().collect();
+
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

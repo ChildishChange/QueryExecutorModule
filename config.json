@@ -10,6 +10,7 @@
     "DBPEDIA":
     {
       "SCHEMA":"/path/to/dbpedia/schema",
+      "META":"/path/to/dbpedia/meta",
       "INSTANCE":
       {
         "BENCHMARK1":"/path/to/benchmark1"
@@ -18,6 +19,7 @@
     "LUBM":
     {
       "SCHEMA":"/path/to/lubm/schema",
+      "META":"/path/to/lubm/meta",
       "INSTANCE":
       {
         "LUBM1":"/path/to/lubm1"

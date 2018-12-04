@@ -19,7 +19,6 @@ import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.shared.PrefixMapping;
 import org.apache.jena.sparql.algebra.Algebra;
 import org.apache.jena.sparql.algebra.Op;
-import org.apache.jena.sparql.algebra.OpAsQuery;
 import org.apache.jena.sparql.core.TriplePath;
 import org.apache.jena.sparql.engine.QueryIterator;
 import org.apache.jena.sparql.engine.binding.Binding;
@@ -31,6 +30,9 @@ import org.buaa.nlsde.jianglili.reasoningquery.QueryRewrting;
 import org.buaa.nlsde.jianglili.reasoningquery.conceptExtract.Concept;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.mortbay.jetty.HttpStatus;
+import org.mortbay.jetty.Request;
+import org.mortbay.jetty.Server;
 import org.mortbay.jetty.handler.AbstractHandler;
 
 import javax.servlet.ServletException;
@@ -47,18 +49,28 @@ import java.util.Queue;
 public class QueryEntrance extends AbstractHandler {
 
     private static Concept concept = null;
+    private static String memOnEachCore;
+    private static JSONObject config;
+
+    private static String currentInstanceFile = null;
+    private static String currentSchemaFile = null;
 
     public static void main(String[] args)
             throws Exception {
         //load config from file
-        JSONObject config = loadJSONFromFile(args[0]);
+        config = loadJSONFromFile(args[0]);
         if(config==null){return;}
 
         //setup cluster config
-        String memOnEachCore = config.getString("MEMORY");
+        memOnEachCore = config.getString("MEMORY");
         int serverPort = Integer.parseInt(config.getString("PORT"));
-        boolean localFlag = true;
 
+        //start server
+        Server server = new Server(serverPort);
+        server.setHandler(new QueryEntrance());
+        server.start();
+
+        /*
         //test config
         String queryFile = config.getString("QUERYFILE");
         String queryString = config.getString("QUERY");
@@ -73,7 +85,7 @@ public class QueryEntrance extends AbstractHandler {
             concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
             if (jenaFlag) {
                 Dataset instances = DatasetFactory.create(RDFDataMgr.loadModel(instanceFile));
-                querySparql(instances, concept, queryString, rewriteFlag, limNum,config.getString("META"));
+                querySparql(instances, schemaFile, queryString, rewriteFlag, limNum,config.getString("META"));
             } else {
                 initRuntimeEnvir(instanceFile, memOnEachCore, localFlag, schemaFile);
                 List<SolutionMapping> a = runSPARQLQuery(queryString, concept, limNum, cachePoolFlag, rewriteFlag,config.getString("META"));
@@ -87,10 +99,7 @@ public class QueryEntrance extends AbstractHandler {
             e.printStackTrace();
         }
 
-        //start server
-        //Server server = new Server(serverPort);
-        //server.setHandler(new QueryEntrance());
-        //server.start();
+        */
     }
 
     private static JSONObject loadJSONFromFile(String configFile) {
@@ -112,70 +121,97 @@ public class QueryEntrance extends AbstractHandler {
                        int i)
             throws IOException,
                    ServletException{
-        //httpServletResponse.setContentType("text/html;charset=utf-8");
-        //httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-        //((Request)httpServletRequest).setHandled(true);
-        //httpServletResponse.getWriter().println("<h1>Hello World</h1>");
-
-/*
         //get the url and parameters
         String url = httpServletRequest.getRequestURI();
         httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
         httpServletResponse.setHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type,Accept,Origin");
 
-        // get the query parameter
-        String query = httpServletRequest.getParameter("q");
-        String data = httpServletRequest.getParameter("data");
+        boolean rewriteFlag;
+        boolean jenaFlag;
+        boolean cachePoolFlag;
+        int limNum;
 
-        //parameter initialization
+        //获取主要参数
+        String queryString = httpServletRequest.getParameter("QUERY");
+        String knowledgeGraph = httpServletRequest.getParameter("GRAPH");
+        String instance = httpServletRequest.getParameter("INSTANCE");
 
-        String instanceFile = args[0];
-        String schemaFile = args[1];
-        String queryFile = args[2];
+        if (queryString == null ||
+            knowledgeGraph == null ||
+            instance == null) {
+            httpServletResponse.setStatus(HttpStatus.ORDINAL_404_Not_Found);
+            ((Request)httpServletRequest).setHandled(true);
+            return;
+        }
 
+        try {
+            //获取其他参数
+            rewriteFlag = Boolean.valueOf(httpServletRequest.getParameter("REWRITE"));
+            jenaFlag = Boolean.valueOf(httpServletRequest.getParameter("JENA"));
+            cachePoolFlag = Boolean.valueOf(httpServletRequest.getParameter("CACHE"));
+            limNum = Integer.parseInt(httpServletRequest.getParameter("LIM"));
 
-        //rewrite or not
-        Boolean rewriteFlag = args[3].charAt(0)=='1';
-        //rewrite options
-        int limNum = Integer.parseInt(args[4]);
+            //根据GRAPH确定使用的schema、instance、meta
+            JSONObject selectedGraph = config.getJSONObject("GRAPHS").getJSONObject(knowledgeGraph);
+            //如果更换了图谱，需要重新初始化
+            String schemaFile;
+            if(currentSchemaFile.equals(selectedGraph.getString("SCHEMA"))) {
+                schemaFile = currentSchemaFile;
+            } else {
+                schemaFile = selectedGraph.getString("SCHEMA");
+                concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
+            }
+            //如果更换了instance，需要重新启动
+            String instanceFile;
+            if(currentInstanceFile.equals(selectedGraph.getString(instance))) {
+                instanceFile = currentInstanceFile;
+            } else {
+                instanceFile = selectedGraph.getString(instance);
+                closeSparkContext();
+                if(!jenaFlag) {
+                    initRuntimeEnvir(instanceFile, memOnEachCore, true, schemaFile);
+                }
+            }
+            String metaFile = selectedGraph.getString("META");
 
-        //jena or s2xt
-        boolean jenaFlag = Integer.parseInt(args[5])==1;
-        //cache pool or not
-        boolean cachePoolFlag =Integer.parseInt(args[6])==1;
-
-
-        //不管重不重写，都需要初始化concept
-        try
-        {
-            Concept concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
-
-            if (jenaFlag)
-            {
+            List<SolutionMapping> results;
+            if (jenaFlag) {
                 Dataset instances = DatasetFactory.create(RDFDataMgr.loadModel(instanceFile));
-                querySparql(instances, concept, queryFile, rewriteFlag, limNum);
+                //TODO：修改这里
+                results = null;
+                querySparql(instances, queryString, rewriteFlag, limNum, metaFile);
+            } else {
+                results = runSPARQLQuery(queryString, concept, limNum, cachePoolFlag, rewriteFlag, metaFile);
+                if(results == null)
+                    System.out.println("Result:0");
+                else
+                    System.out.println("Result:"+ results.size());
             }
-            else
-            {
-                initRuntimeEnvir(instanceFile, memOnEachCore, localFlag, schemaFile);
-                runSPARQLQuery(queryFile, concept, limNum, cachePoolFlag, rewriteFlag);
-            }
-        }
-        catch(Exception e)
-        {
 
+            JSONObject returnValue = new JSONObject();
+            returnValue.put("RESULT",results);
+            httpServletResponse.setContentType("application/json;charset=utf-8");
+            httpServletResponse.getWriter().println(returnValue);
+            httpServletResponse.setStatus(HttpStatus.ORDINAL_200_OK);
+            ((Request)httpServletRequest).setHandled(true);
+            httpServletResponse.getWriter().close();
         }
-*/
+        catch(Exception e) {
+            e.printStackTrace();
+            httpServletResponse.setStatus(HttpStatus.ORDINAL_404_Not_Found);
+            ((Request)httpServletRequest).setHandled(true);
+        }
     }
 
+    //TODO：添加返回值
     private static void querySparql(Dataset instances,
-                                    Concept concept,
                                     String queryString,
                                     Boolean rewriteFlag,
                                     int limNum,
                                     String metaData)
             throws Exception {
+        //concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
         Query query =  ReWriteBasedOnStruct(queryString,metaData);
         Op opRoot = Algebra.compile(query) ;
         System.out.println("opRoot:"+opRoot.toString());
@@ -197,8 +233,7 @@ public class QueryEntrance extends AbstractHandler {
     private static void initRuntimeEnvir(String instanceFile,
                                         String executorMem,
                                         Boolean localFlag,
-                                        String schemaFile)
-            throws Exception {
+                                        String schemaFile) {
         Const.inputFile_$eq(instanceFile);
         Const.executorMem_$eq(executorMem);
         Const.locale_$eq(localFlag);
@@ -208,13 +243,16 @@ public class QueryEntrance extends AbstractHandler {
         SparkFacade.loadGraph();
     }
 
+    private static void closeSparkContext(){
+        SparkFacade.closeContext();
+    }
+
     private static List<SolutionMapping> runSPARQLQuery(String queryString,
                                                      Concept concept,
                                                      int limNum,
                                                      boolean cachePoolFlag,
                                                      boolean rewriteFlag,
                                                      String metaData)
-            throws Exception
     {
         try {
             IntermediateResultsModel.getInstance().clearResults();

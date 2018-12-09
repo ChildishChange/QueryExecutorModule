@@ -19,6 +19,7 @@ import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.shared.PrefixMapping;
 import org.apache.jena.sparql.algebra.Algebra;
 import org.apache.jena.sparql.algebra.Op;
+import org.apache.jena.sparql.algebra.OpAsQuery;
 import org.apache.jena.sparql.algebra.op.OpProject;
 import org.apache.jena.sparql.core.TriplePath;
 import org.apache.jena.sparql.core.Var;
@@ -64,12 +65,13 @@ public class QueryEntrance extends AbstractHandler {
         config = loadJSONFromFile(args[0]);
         if(config==null){return;}
 
-        //setup cluster config
+        //setup cluster
         memOnEachCore = config.getString("MEMORY");
         int serverPort = Integer.parseInt(config.getString("PORT"));
 
+        //start running
         if(config.getBoolean("TESTMODE")) {
-            //test config
+
             String queryString = config.getString("QUERY4");
             String instanceFile = config.getString("INSTANCE");
             String schemaFile = config.getString("SCHEMA");
@@ -77,28 +79,29 @@ public class QueryEntrance extends AbstractHandler {
             int limNum = 0;
             boolean jenaFlag = true;
             boolean cachePoolFlag = false;
+            String metaFile = config.getString("META");
+            concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
 
-            try {
-                concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
-                if (jenaFlag) {
-                    Dataset instances = DatasetFactory.create(RDFDataMgr.loadModel(instanceFile));
-                    querySparql(instances, queryString, rewriteFlag, limNum,config.getString("META"));
-                } else {
-                    initRuntimeEnvir(instanceFile, memOnEachCore, true, schemaFile);
-                    List<SolutionMapping> a = runSPARQLQuery(queryString, concept, limNum, cachePoolFlag, rewriteFlag,config.getString("META"));
-                    if(a==null)
-                        System.out.println("Result:0");
-                    else
-                        System.out.println("Result:"+ a.size());
-                }
+            Query query =  ReWriteBasedOnStruct(queryString,metaFile);
+            Op opRoot = Algebra.compile(query) ;
+            Op opRootRewrite = (rewriteFlag)?QueryRewrting.transform(opRoot,concept,limNum):null;
+
+            JSONObject responseJSON;
+
+            if (jenaFlag) {
+                Dataset instances = DatasetFactory.create(RDFDataMgr.loadModel(instanceFile));
+                responseJSON = generateResponseJSON((rewriteFlag)?opRootRewrite:opRoot,
+                        jenaFlag,
+                        querySparql(instances,
+                                (rewriteFlag)?opRootRewrite:opRoot));
+            } else {
+                responseJSON = generateResponseJSON((rewriteFlag)?opRootRewrite:opRoot,
+                        jenaFlag,
+                        runSPARQLQuery((rewriteFlag)?opRootRewrite:opRoot,
+                                cachePoolFlag));
             }
-            catch(Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else
-        {
-            //start server
+            System.out.println(responseJSON);
+        } else {
             Server server = new Server(serverPort);
             server.setHandler(new QueryEntrance());
             server.start();
@@ -116,7 +119,6 @@ public class QueryEntrance extends AbstractHandler {
         return config;
     }
 
-
     @Override
     public void handle(String s,
                        HttpServletRequest httpServletRequest,
@@ -124,26 +126,23 @@ public class QueryEntrance extends AbstractHandler {
                        int i)
             throws IOException,
                    ServletException{
-        //get the url and parameters
-        String url = httpServletRequest.getRequestURI();
-        System.out.println("Receive request"+url);
 
         httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
         httpServletResponse.setHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type,Accept,Origin");
 
-        boolean rewriteFlag = false;
-        boolean jenaFlag = true;
+        boolean rewriteFlag;
+        boolean jenaFlag;
         boolean cachePoolFlag = false;
         int limNum = 0;
 
         try {
             JSONObject content = new JSONObject(ReadAsChars(httpServletRequest));
+
             //获取主要参数
             String queryString = content.getString("query");
-            String knowledgeGraph = content.getString("graph");//LUBM DBPEDIA
-            String instance = content.getString("instance");//LUBM1
-
+            String knowledgeGraph = content.getString("graph");
+            String instance = content.getString("instance");
             if (queryString == null ||
                 knowledgeGraph == null ||
                 instance == null) {
@@ -153,10 +152,10 @@ public class QueryEntrance extends AbstractHandler {
             }
 
             //获取其他参数
-            //rewriteFlag = Boolean.valueOf(httpServletRequest.getParameter("REWRITE"));
-            //jenaFlag = Boolean.valueOf(httpServletRequest.getParameter("JENA"));
-            //cachePoolFlag = Boolean.valueOf(httpServletRequest.getParameter("CACHE"));
-            //limNum = Integer.parseInt(httpServletRequest.getParameter("LIM"));
+            rewriteFlag = content.getBoolean("rewrite");
+            jenaFlag = content.getBoolean("jena");
+            //cachePoolFlag = content.getBoolean("CACHE");
+            //limNum = content.getInt("LIM");
 
             //根据GRAPH确定使用的schema、instance、meta
             JSONObject selectedGraph = config.getJSONObject("GRAPHS").getJSONObject(knowledgeGraph);
@@ -166,6 +165,7 @@ public class QueryEntrance extends AbstractHandler {
                 schemaFile = currentSchemaFile;
             } else {
                 schemaFile = selectedGraph.getString("SCHEMA");
+                currentSchemaFile = schemaFile;
                 concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
             }
             //如果更换了instance，需要重新启动
@@ -174,25 +174,30 @@ public class QueryEntrance extends AbstractHandler {
                 instanceFile = currentInstanceFile;
             } else {
                 instanceFile = selectedGraph.getJSONObject("INSTANCE").getString(instance);
-                //closeSparkContext();
-                if(!jenaFlag) {
-                    initRuntimeEnvir(instanceFile, memOnEachCore, true, schemaFile);
-                }
+                currentInstanceFile = instanceFile;
+                initRuntimeEnvironment(instanceFile, memOnEachCore, true, schemaFile);
             }
-            String metaFile = selectedGraph.getString("META");
 
-            JSONObject jenaResults = null;
-            List<SolutionMapping> s2xResults = null;
+            String metaFile = selectedGraph.getString("META");
+            Query query =  ReWriteBasedOnStruct(queryString,metaFile);
+            Op opRoot = Algebra.compile(query) ;
+            Op opRootRewrite = (rewriteFlag)?QueryRewrting.transform(opRoot,concept,limNum):null;
+
+            JSONObject responseJSON;
             if (jenaFlag) {
                 Dataset instances = DatasetFactory.create(RDFDataMgr.loadModel(instanceFile));
-                //TODO：修改这里
-                jenaResults = querySparql(instances, queryString, rewriteFlag, limNum, metaFile);
+                responseJSON = generateResponseJSON((rewriteFlag)?opRootRewrite:opRoot,
+                                                    jenaFlag,
+                                                    querySparql(instances,
+                                                                (rewriteFlag)?opRootRewrite:opRoot));
             } else {
-                s2xResults = runSPARQLQuery(queryString, concept, limNum, cachePoolFlag, rewriteFlag, metaFile);
+                responseJSON = generateResponseJSON((rewriteFlag)?opRootRewrite:opRoot,
+                                                    jenaFlag,
+                                                    runSPARQLQuery((rewriteFlag)?opRootRewrite:opRoot,
+                                                                    cachePoolFlag));
             }
-
             httpServletResponse.setContentType("application/json;charset=utf-8");
-            httpServletResponse.getWriter().println((jenaFlag)?jenaResults:s2xResults);
+            httpServletResponse.getWriter().println(responseJSON);
             httpServletResponse.setStatus(HttpStatus.ORDINAL_200_OK);
             ((Request)httpServletRequest).setHandled(true);
             httpServletResponse.getWriter().close();
@@ -204,94 +209,32 @@ public class QueryEntrance extends AbstractHandler {
         }
     }
 
-    //TODO：添加返回值
-    private static JSONObject querySparql(Dataset instances,
-                                    String queryString,
-                                    Boolean rewriteFlag,
-                                    int limNum,
-                                    String metaData)
-            throws Exception {
-        //concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
-        Query query =  ReWriteBasedOnStruct(queryString,metaData);
-        Op opRoot = Algebra.compile(query) ;
-        //System.out.println("opRoot:"+opRoot.toString());
-        Op opRootRewrite = (rewriteFlag)?QueryRewrting.transform(opRoot,concept,limNum):null;
-        //if(rewriteFlag)
-          //  System.out.println("opRewrite:"+opRootRewrite.toString());
-
-        QueryIterator qIter = Algebra.exec((rewriteFlag)?opRootRewrite:opRoot, instances);
-        JSONObject results = new JSONObject();
-        results.put("Vars",((OpProject)opRoot).getVars());
-        ArrayList<String> resultStrings = new ArrayList<>();
-        int resultNum = 0;
-        for ( ; qIter.hasNext() ; ) {
-            Binding b = qIter.nextBinding();
-            Iterator<Var> b_var = b.vars();
-            StringBuilder sb = new StringBuilder();
-            for(;b_var.hasNext();)
-            {
-                Var temp = b_var.next();
-                sb.append(b.get(temp)+"\t");
-            }
-            resultStrings.add(sb.toString());
-            resultNum++;
-        }
-        results.put("Results",resultStrings);
-        qIter.close();
-        System.out.println("# original query solution mappings: "+resultNum);
-        return results;
+    private static QueryIterator querySparql(Dataset instances, Op opRoot) {
+        return Algebra.exec(opRoot, instances);
     }
 
-    private static void initRuntimeEnvir(String instanceFile,
-                                        String executorMem,
-                                        Boolean localFlag,
-                                        String schemaFile) {
+    private static void initRuntimeEnvironment(String instanceFile,
+                                               String executorMem,
+                                               Boolean localFlag,
+                                               String schemaFile) {
         Const.inputFile_$eq(instanceFile);
         Const.executorMem_$eq(executorMem);
         Const.locale_$eq(localFlag);
         Const.schema_$eq(schemaFile);
-        //concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
         SparkFacade.createSparkContext();
         SparkFacade.loadGraph();
     }
-
-    private static void closeSparkContext(){
-        SparkFacade.closeContext();
-    }
-
-    private static List<SolutionMapping> runSPARQLQuery(String queryString,
-                                                     Concept concept,
-                                                     int limNum,
-                                                     boolean cachePoolFlag,
-                                                     boolean rewriteFlag,
-                                                     String metaData)
-    {
+    
+    private static List<SolutionMapping> runSPARQLQuery(Op opRoot, boolean cachePoolFlag) {
         try {
             (IntermediateResultsModel.getInstance()).clearResults();
-
-            Query query = ReWriteBasedOnStruct(queryString,metaData);
-            PrefixMapping prefixes = query.getPrefixMapping();
-            Op opRoot = Algebra.compile(query);
-            System.out.println("opRoot:"+opRoot.toString());
-            Op opRootRewrite = (rewriteFlag) ? QueryRewrting.transform(opRoot, concept, limNum) : null;
-            if(rewriteFlag)
-                System.out.println("opRootRewrite:"+opRootRewrite);
-
+            PrefixMapping prefixes = (OpAsQuery.asQuery(opRoot)).getPrefixMapping();
             AlgebraTranslator trans = new AlgebraTranslator(prefixes);
-
-            if (rewriteFlag) {
-                opRootRewrite.visit(new AlgebraWalker(trans));
-                if (cachePoolFlag && CachePool.contains(opRootRewrite))
-                    return CachePool.getFinalResult(opRootRewrite).toJavaRDD().collect();
-            }
-            else {
-                opRoot.visit(new AlgebraWalker(trans));
-                if (cachePoolFlag && CachePool.contains(opRoot))
-                    return CachePool.getFinalResult(opRoot).toJavaRDD().collect();
-            }
+            opRoot.visit(new AlgebraWalker(trans));
+            if (cachePoolFlag && CachePool.contains(opRoot))
+                return CachePool.getFinalResult(opRoot).toJavaRDD().collect();
 
             Queue<SparkOp> q = trans.getExecutionQueue();
-
             while (!q.isEmpty()) {
                 SparkOp actual = q.poll();
                 if (cachePoolFlag) {
@@ -300,32 +243,66 @@ public class QueryEntrance extends AbstractHandler {
                 }
                 actual.execute();
             }
-
             if (cachePoolFlag) {
-                if (rewriteFlag) {
-                    RDD<SolutionMapping> res = CachePool.getFinalResult(opRootRewrite);
-                    return (res != null) ? CachePool.getFinalResult(opRootRewrite).toJavaRDD().collect() : null;
-                } else {
-                    RDD<SolutionMapping> res = CachePool.getFinalResult(opRoot);
-                    return (res != null) ? CachePool.getFinalResult(opRoot).toJavaRDD().collect() : null;
-                }
+                RDD<SolutionMapping> res = CachePool.getFinalResult(opRoot);
+                return (res != null) ? CachePool.getFinalResult(opRoot).toJavaRDD().collect() : null;
             }
-        }
-        catch(Exception e)
-        {
+        } catch(Exception e) {
             e.printStackTrace();
         }
         return IntermediateResultsModel.getInstance().getFinalResultAsList();
     }
 
+    private static JSONObject generateResponseJSON(Op op, boolean jenaFlag, Object queryResults) throws Exception {
+        JSONObject responseJSON = new JSONObject();
+        ArrayList<String> resultStrings = new ArrayList<>();
+        StringBuilder resultStringBuilder = new StringBuilder();
+        List<Var> vars = ((OpProject)op).getVars();
+        responseJSON.put("Vars",vars);
+        if(queryResults == null) {
+            responseJSON.put("Results",resultStrings);
+            responseJSON.put("Count",0);
+            return responseJSON;
+        }
+
+        if(jenaFlag) {
+            QueryIterator qIterator = (QueryIterator)queryResults;
+            for ( ; qIterator.hasNext() ; ) {
+                Binding b = qIterator.nextBinding();
+                Iterator<Var> b_var = b.vars();
+                for(;b_var.hasNext();) {
+                    Var temp = b_var.next();
+                    resultStringBuilder.append((b.get(temp).isURI()) ? "<" + b.get(temp) + ">" : b.get(temp)).append("\t");
+                }
+                if(!resultStrings.contains(resultStringBuilder.toString())) {
+                    resultStrings.add(resultStringBuilder.toString());
+                }
+                resultStringBuilder.delete(0,resultStringBuilder.length());
+            }
+            qIterator.close();
+        } else {
+            List<SolutionMapping> solutionMappings = (List<SolutionMapping>)queryResults;
+            for(SolutionMapping solutionMapping: solutionMappings) {
+                for(Var var : vars) {
+                    resultStringBuilder.append(solutionMapping.getValueToField(var.toString())).append("\t");
+                }
+                if(!resultStrings.contains(resultStringBuilder.toString())) {
+                    resultStrings.add(resultStringBuilder.toString());
+                }
+                resultStringBuilder.delete(0,resultStringBuilder.length());
+            }
+        }
+        responseJSON.put("Results",resultStrings);
+        responseJSON.put("Count",resultStrings.size());
+        return responseJSON;
+    }
 
     private static Query ReWriteBasedOnStruct(String queryString, String metaData)
-            throws Exception
-    {
+            throws Exception {
         JSONObject meta = loadJSONFromFile(metaData);
         JSONObject eqCls = meta.getJSONObject("equivalentCls");
         JSONObject eqPrp = meta.getJSONObject("equivalentPrp");
-        JSONObject sameas = meta.getJSONObject("sameas");
+        JSONObject sameAs = meta.getJSONObject("sameAs");
         JSONObject subCls = meta.getJSONObject("subCls");
         JSONObject subPrp = meta.getJSONObject("subPrp");
 
@@ -344,11 +321,11 @@ public class QueryEntrance extends AbstractHandler {
                     if(triple.isTriple()) {
                         Node s = triple.getSubject();
                         //首先检查meta中是否存在SPO的sameas关系，替换
-                        s = getNode(s, sameas);
+                        s = getNode(s, sameAs);
                         Node p = triple.getPredicate();
-                        p = getNode(p, sameas);
+                        p = getNode(p, sameAs);
                         Node o = triple.getObject();
-                        o = getNode(o, sameas);
+                        o = getNode(o, sameAs);
                         //检查P是否是rdf:type
                         if(p.toString().equals(RDF.type.toString())) {
                             //检查o 是否可以被 equivalentCls和subCls替换
@@ -378,7 +355,7 @@ public class QueryEntrance extends AbstractHandler {
             }
         }
 
-        System.out.println(query);
+        System.out.println("Before Structural Rewrite:"+query);
         //替换subCls与subPrp
         for(Triple triple : triplesToUnion) {
             if(triple.getPredicate().toString().equals(RDF.type.toString())) {//替换o.subcls
@@ -415,7 +392,7 @@ public class QueryEntrance extends AbstractHandler {
                 element.addElement(eU);
             }
         }
-        System.out.println(query);
+        System.out.println("After Structural Rewrite:"+query);
         return query;
     }
 
@@ -433,8 +410,7 @@ public class QueryEntrance extends AbstractHandler {
     }
 
 
-    private static String ReadAsChars(HttpServletRequest request)
-    {
+    private static String ReadAsChars(HttpServletRequest request) {
         BufferedReader br = null;
         StringBuilder sb = new StringBuilder();
         try {

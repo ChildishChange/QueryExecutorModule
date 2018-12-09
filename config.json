@@ -1,5 +1,5 @@
 {
-  "TESTMODE":true,
+  "TESTMODE":false,
   "PORT":8081,
   "MEMORY":"3G",
   "INSTANCE":"C:/Users/chenyanji/Downloads/S2X_DATA/Universities_1_new.nt",
@@ -19,11 +19,11 @@
     },
     "LUBM":
     {
-      "SCHEMA":"C:/Users/chenyanji/Downloads/S2X_DATA/univ-benchQL-ub.owl",
+      "SCHEMA":"C:/Users/chenyanji/Downloads/S2X_DATA/univ-benchQL-ub-stw.owl",
       "META":"C:/Users/chenyanji/Downloads/src/metadata.json",
       "INSTANCE":
       {
-        "LUBM1":"C:/Users/chenyanji/Downloads/S2X_DATA/lubm1.nt"
+        "LUBM1":"C:/Users/chenyanji/Downloads/S2X_DATA/Universities_1_new.nt"
       }
     }
   }

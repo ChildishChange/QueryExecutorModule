@@ -146,6 +146,8 @@ object GraphLoader extends Logging {
         // Load the whole file into a new RDD
         val lines: RDD[String] = context.textFile(graphPath)
 
+        println("lines count:"+lines.count());
+
         // Split the line with the RDFParser, ignore prefixes
         val splitted: RDD[(String, String, String)] = lines.filter(line => line.length > 0 && !line.startsWith("@prefix") && !line.startsWith("@PREFIX"))
           // split the line

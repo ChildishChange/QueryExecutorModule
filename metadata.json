@@ -12,10 +12,10 @@
     "<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Profaessor>":"<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Teacher>"
   },
   "subCls":{
-    "<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Professor>":[
-      "<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Chair>",
-      "<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#Dean>",
-      "<http://swat.cse.lehigh.edu/onto/univ-bench-dl.owl#AssistantProfessor>"]
+    "<http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Professor>":[
+      "<http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#hair>",
+      "<http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Dean>",
+      "<http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#AssistantProfessor>"]
   },
   "subPrp":{
     "<111>":["<111>","<222>"]

@@ -276,6 +276,7 @@ object SparkFacade extends BasicGraphPattern with ResultBuilder with Projection 
         broadcastedTriples.unpersist(true)
         result
     }
+
     /**
       * Delete double values in the result
       */

@@ -85,7 +85,7 @@ public class SparkBGP implements SparkOp {
         } else {
             // Build the result
             final RDD<SolutionMapping> result = SparkFacade.buildResult(bgp,
-                                                                            bgpMatched);
+                                                                        bgpMatched);
 //            if(result==null)
 //                System.out.println("RDD res in bgp is null");
 			IntermediateResultsModel.getInstance().putResult(ID, result,

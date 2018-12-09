@@ -4,6 +4,11 @@
     <list default="true" id="48361e10-27f5-441a-8c3a-ad644956ebec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/model/graph/GraphLoader.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/model/graph/GraphLoader.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkBGP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkBGP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/sparql/SparkFacade.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/sparql/SparkFacade.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -31,52 +36,54 @@
     <session id="-1379372577">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="18" />
+          <entry key="project.closed" value="23" />
           <entry key="project.open.time.10" value="2" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.13" value="3" />
-          <entry key="project.open.time.14" value="1" />
-          <entry key="project.open.time.15" value="3" />
+          <entry key="project.open.time.14" value="3" />
+          <entry key="project.open.time.15" value="4" />
           <entry key="project.open.time.16" value="5" />
+          <entry key="project.open.time.18" value="1" />
+          <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="19" />
+          <entry key="project.opened" value="24" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="47" />
-          <entry key="java" value="83" />
+          <entry key="class" value="55" />
+          <entry key="java" value="92" />
           <entry key="json" value="6" />
-          <entry key="owl" value="1" />
-          <entry key="scala" value="18" />
-          <entry key="xml" value="2" />
+          <entry key="owl" value="3" />
+          <entry key="scala" value="27" />
+          <entry key="xml" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="47" />
-          <entry key="JAVA" value="83" />
+          <entry key="CLASS" value="55" />
+          <entry key="JAVA" value="92" />
           <entry key="JSON" value="6" />
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Scala" value="18" />
-          <entry key="XML" value="2" />
+          <entry key="PLAIN_TEXT" value="3" />
+          <entry key="Scala" value="27" />
+          <entry key="XML" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="10589" />
-          <entry key="json" value="359" />
-          <entry key="scala" value="18" />
+          <entry key="java" value="11673" />
+          <entry key="json" value="564" />
+          <entry key="scala" value="82" />
           <entry key="xml" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="10589" />
-          <entry key="JSON" value="359" />
-          <entry key="Scala" value="18" />
+          <entry key="JAVA" value="11673" />
+          <entry key="JSON" value="564" />
+          <entry key="Scala" value="82" />
           <entry key="XML" value="20" />
         </counts>
       </usages-collector>
@@ -90,21 +97,26 @@
       <file pinned="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="179" column="51" lean-forward="true" selection-start-line="179" selection-start-column="51" selection-end-line="179" selection-end-column="51" />
+            <state relative-caret-position="118">
+              <caret line="206" column="16" lean-forward="true" selection-start-line="206" selection-start-column="16" selection-end-line="206" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#loadJSONFromFile#0;class#QueryEntrance#0" />
                 <element signature="method#querySparql#0;class#QueryEntrance#0" />
-                <element signature="method#initRuntimeEnvir#0;class#QueryEntrance#0" />
                 <element signature="method#runSPARQLQuery#0;class#QueryEntrance#0" />
                 <element signature="method#ReWriteBasedOnStruct#0;class#QueryEntrance#0" />
-                <element signature="method#getNode#0;class#QueryEntrance#0" />
-                <marker date="1543927590539" expanded="false" signature="2718:3945" ph="..." />
-                <marker date="1543927590539" expanded="true" signature="5983:6982" ph="..." />
-                <marker date="1543927590539" expanded="false" signature="13297:15218" ph="{...}" />
-                <marker date="1543927590539" expanded="true" signature="15325:17244" ph="{...}" />
+                <marker date="1544342542156" expanded="true" signature="6399:7452" ph="..." />
+                <marker date="1544342542156" expanded="false" signature="14095:16016" ph="{...}" />
+                <marker date="1544342542156" expanded="true" signature="16123:18042" ph="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkOp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -112,8 +124,20 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
+            <state relative-caret-position="19">
+              <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/model/graph/GraphLoader.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="103">
+              <caret line="212" column="12" selection-start-line="212" selection-start-column="12" selection-end-line="212" selection-end-column="12" />
+              <folding>
+                <element signature="e#51#101#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -121,8 +145,8 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/metadata.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" column="66" lean-forward="true" selection-start-line="15" selection-start-column="66" selection-end-line="15" selection-end-column="66" />
+            <state relative-caret-position="209">
+              <caret line="17" column="61" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -151,7 +175,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/expression/ExprWalker.java" />
         <option value="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/expression/ExprCompiler.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/IntegrationTest.java" />
         <option value="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/reasoningquery/MainQuery.java" />
         <option value="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/reasoningquery/assertionReplace/AlgebraTransformer.java" />
@@ -172,6 +195,10 @@
         <option value="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/reasoningquery/QueryRewrting.java" />
         <option value="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/model/rdf/executionresults/IntermediateResultsModel.java" />
         <option value="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/TestJena.java" />
+        <option value="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkBGP.java" />
+        <option value="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/sparql/SparkFacade.scala" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/model/graph/GraphLoader.scala" />
         <option value="$PROJECT_DIR$/metadata.json" />
         <option value="$PROJECT_DIR$/config.json" />
         <option value="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java" />
@@ -191,6 +218,17 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="SPARQL engine for Apache Spark" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="width" value="977" />
@@ -204,33 +242,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="sparkForSparql" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="src" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="sparkForSparql" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="src" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="sparkForSparql" type="58d84e3e:PackageViewProjectNode" />
-              <item name="src" type="616d4139:PackageViewModuleNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -254,57 +265,47 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="sparkrdf" type="462c0819:PsiDirectoryNode" />
-              <item name="run" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sparkForSparql" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="sparkrdf" type="462c0819:PsiDirectoryNode" />
-              <item name="sparql" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sparkForSparql" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sparkForSparql" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="jianglili" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sparkForSparql" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="jianglili" type="462c0819:PsiDirectoryNode" />
-              <item name="query" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sparkForSparql" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="jianglili" type="462c0819:PsiDirectoryNode" />
-              <item name="query" type="462c0819:PsiDirectoryNode" />
-              <item name="spark" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sparkForSparql" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="jianglili" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="graph" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
         <option name="show-excluded-files" value="false" />
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="sparkForSparql" type="58d84e3e:PackageViewProjectNode" />
+              <item name="src" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="sparkForSparql" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="src" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="sparkForSparql" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="src" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
       </pane>
     </panes>
   </component>
@@ -312,14 +313,14 @@
     <property name="SearchEverywhereHistoryKey" value="Op&#9;PSI&#9;JAVA://de.tf.uni.freiburg.sparkrdf.parser.query.op.SparkBGP#op" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543927805355" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544261691382" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.side.proportion" value="0.3862069" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
@@ -419,37 +420,51 @@
       <workItem from="1543684276308" duration="60000" />
       <workItem from="1543716232191" duration="10689000" />
       <workItem from="1543769040825" duration="29967000" />
-      <workItem from="1543920198599" duration="6626000" />
+      <workItem from="1543920198599" duration="7044000" />
+      <workItem from="1543986798811" duration="7123000" />
+      <workItem from="1543994684200" duration="547000" />
+      <workItem from="1544165533962" duration="8110000" />
+      <workItem from="1544257937363" duration="3645000" />
+      <workItem from="1544340775678" duration="1761000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119748000" />
+    <option name="totallyTimeSpent" value="141352000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" x="598" y="86" width="340" height="656" id="Project" order="0" sideWeight="0.49618322" side_tool="true" visible="true" weight="0.0" />
+      <window_info content_ui="combo" x="598" y="86" width="340" height="656" id="Project" order="0" sideWeight="0.49618322" side_tool="true" weight="0.09852547" />
       <window_info id="Structure" order="1" sideWeight="0.50076336" side_tool="true" weight="0.24932976" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" sideWeight="0.5038168" side_tool="true" weight="0.24962743" />
+      <window_info id="Favorites" order="6" sideWeight="0.5038168" side_tool="true" weight="0.24932976" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.41841003" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.5293296" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.1829609" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.41759777" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.07821229" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.14944135" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32960895" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32960895" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Java Enterprise" order="11" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.48463687" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="10" visible="true" weight="0.23044693" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.32960895" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.2905028" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -458,7 +473,7 @@
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Database" order="7" weight="0.3297587" />
-      <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="right" id="Maven Projects" order="8" weight="0.25737265" />
       <window_info anchor="right" id="Bean Validation" order="9" />
     </layout>
     <layout-to-restore>
@@ -497,6 +512,42 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -504,39 +555,45 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkBGP.java</url>
-          <line>80</line>
+          <url>file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java</url>
+          <line>140</line>
           <properties />
-          <option name="timeStamp" value="32" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkBGP.java</url>
-          <line>83</line>
+          <url>file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java</url>
+          <line>128</line>
           <properties />
-          <option name="timeStamp" value="34" />
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkBGP.java</url>
-          <line>85</line>
+          <url>file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java</url>
+          <line>223</line>
           <properties />
-          <option name="timeStamp" value="35" />
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkBGP.java</url>
-          <line>86</line>
+          <url>file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java</url>
+          <line>239</line>
           <properties />
-          <option name="timeStamp" value="36" />
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkOp.java</url>
-          <line>12</line>
-          <properties class="de.tf.uni.freiburg.sparkrdf.parser.query.op.SparkOp" method="execute">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="29" />
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/model/graph/GraphLoader.scala</url>
+          <line>141</line>
+          <properties />
+          <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="Const.locale" language="Scala" />
+        <watch expression="Const.inputFile" language="Scala" />
+        <watch expression="Const" language="Scala" />
+        <watch expression="actual" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -545,6 +602,46 @@
   <component name="debuggerHistoryManager">
     <expressions id="watch">
       <expression>
+        <expression-string>actual</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>Const</expression-string>
+        <language-id>Scala</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>Const.inputFile</expression-string>
+        <language-id>Scala</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>Const.locale</expression-string>
+        <language-id>Scala</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>concept</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>Const.inputFile</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>inputFile</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>Const</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>instances</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -552,139 +649,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/util/stream/Collectors.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3724">
-          <caret line="262" column="53" selection-start-line="262" selection-start-column="53" selection-end-line="262" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jena-arq-3.0.0.jar!/org/apache/jena/query/QueryFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/model/graph/GraphLoader.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2546">
-          <caret line="146" column="12" selection-start-line="146" selection-start-column="12" selection-end-line="146" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jena-arq-3.0.0.jar!/org/apache/jena/sparql/algebra/OpVisitor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-790">
-          <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jena-arq-3.0.0.jar!/org/apache/jena/sparql/algebra/Op.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jena-arq-3.0.0.jar!/org/apache/jena/sparql/algebra/AlgebraGenerator.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-644">
-          <caret line="341" column="17" selection-start-line="341" selection-start-column="17" selection-end-line="341" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jena-arq-3.0.0.jar!/org/apache/jena/sparql/algebra/Algebra.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="51" column="65" lean-forward="true" selection-start-line="51" selection-start-column="65" selection-end-line="51" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jena-arq-3.0.0.jar!/org/apache/jena/sparql/algebra/OpVisitorBase.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/reasoningquery/conceptExtract/Concept.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/task/sparql/rewriter/OptRewriter.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="54" column="6" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/AlgebraTranslator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkOp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/reasoningquery/conceptExtract/ConceptUtilNodeWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/sparql/operator/bgp/BasicGraphPattern.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="27" column="25" lean-forward="true" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/sparql/SparkFacade.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="275" column="42" lean-forward="true" selection-start-line="275" selection-start-column="42" selection-end-line="275" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkBGP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/model/rdf/executionresults/IntermediateResultsModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="44" column="17" lean-forward="true" selection-start-line="44" selection-start-column="12" selection-end-line="44" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jena-arq-3.0.0.jar!/org/apache/jena/sparql/algebra/op/OpBGP.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jena-arq-3.0.0.jar!/org/apache/jena/sparql/core/BasicPattern.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="66" column="23" lean-forward="true" selection-start-line="66" selection-start-column="11" selection-end-line="66" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/jena-arq-3.0.0.jar!/org/apache/jena/sparql/algebra/op/OpProject.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -706,13 +670,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/spark-assembly-1.6.2-hadoop2.3.0.jar!/org/json/JSONObject.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="266" column="21" selection-start-line="266" selection-start-column="21" selection-end-line="266" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/jena-core-3.0.0.jar!/org/apache/jena/graph/Triple.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
@@ -731,9 +688,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="49" column="42" lean-forward="true" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -762,9 +716,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="61" column="44" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -839,17 +790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/util/Iterator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
-          <caret line="91" column="17" selection-start-line="91" selection-start-column="17" selection-end-line="91" selection-end-column="17" />
-          <folding>
-            <element signature="e#2496#2497#0" expanded="true" />
-            <element signature="e#2561#2562#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/owlapi-distribution-3.4.3-bin.jar!/uk/ac/manchester/cs/owl/owlapi/OWLOntologyManagerImpl.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
@@ -864,13 +804,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/reasoningquery/conceptExtract/ConceptUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="58" column="29" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/reasoningquery/QueryRewrting.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
@@ -878,13 +811,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/metadata.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="66" lean-forward="true" selection-start-line="15" selection-start-column="66" selection-end-line="15" selection-end-column="66" />
         </state>
       </provider>
     </entry>
@@ -902,29 +828,181 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkProjection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-228">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/spark-assembly-1.6.2-hadoop2.3.0.jar!/org/apache/spark/broadcast/Broadcast.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/spark-assembly-1.6.2-hadoop2.3.0.jar!/org/apache/spark/SparkContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="97" column="6" selection-start-line="97" selection-start-column="6" selection-end-line="97" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/constants/Const.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1727">
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/temp.owl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2451" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/temp2.owl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8664" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/reasoningquery/conceptExtract/ConceptUtilNodeWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="25" column="53" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/reasoningquery/conceptExtract/ConceptUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="38" column="27" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="626">
+          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/spark-assembly-1.6.2-hadoop2.3.0.jar!/javax/servlet/ServletRequest.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/jena-arq-3.0.0.jar!/org/apache/jena/sparql/algebra/Algebra.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-133">
+          <caret line="86" column="32" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/jena-arq-3.0.0.jar!/org/apache/jena/sparql/engine/binding/Binding.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/util/Iterator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="69" column="6" selection-start-line="69" selection-start-column="6" selection-end-line="69" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/jena-arq-3.0.0.jar!/org/apache/jena/sparql/engine/iterator/QueryIteratorWrapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="46" column="21" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/jena-arq-3.0.0.jar!/org/apache/jena/sparql/serializer/SerializationContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/sparql/operator/result/ResultBuilder.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-439">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/sparql/SparkFacade.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4446">
+          <caret line="265" column="14" selection-start-line="265" selection-start-column="14" selection-end-line="265" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/spark-assembly-1.6.2-hadoop2.3.0.jar!/org/json/JSONObject.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="327" selection-start-line="327" selection-end-line="327" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkBGP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="86" column="63" selection-start-line="86" selection-start-column="63" selection-end-line="86" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/model/graph/GraphLoader.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="212" column="12" selection-start-line="212" selection-start-column="12" selection-end-line="212" selection-end-column="12" />
+          <folding>
+            <element signature="e#51#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/metadata.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="17" column="61" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
+        <state relative-caret-position="19">
+          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="179" column="51" lean-forward="true" selection-start-line="179" selection-start-column="51" selection-end-line="179" selection-end-column="51" />
+        <state relative-caret-position="118">
+          <caret line="206" column="16" lean-forward="true" selection-start-line="206" selection-start-column="16" selection-end-line="206" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#loadJSONFromFile#0;class#QueryEntrance#0" />
             <element signature="method#querySparql#0;class#QueryEntrance#0" />
-            <element signature="method#initRuntimeEnvir#0;class#QueryEntrance#0" />
             <element signature="method#runSPARQLQuery#0;class#QueryEntrance#0" />
             <element signature="method#ReWriteBasedOnStruct#0;class#QueryEntrance#0" />
-            <element signature="method#getNode#0;class#QueryEntrance#0" />
-            <marker date="1543927590539" expanded="false" signature="2718:3945" ph="..." />
-            <marker date="1543927590539" expanded="true" signature="5983:6982" ph="..." />
-            <marker date="1543927590539" expanded="false" signature="13297:15218" ph="{...}" />
-            <marker date="1543927590539" expanded="true" signature="15325:17244" ph="{...}" />
+            <marker date="1544342542156" expanded="true" signature="6399:7452" ph="..." />
+            <marker date="1544342542156" expanded="false" signature="14095:16016" ph="{...}" />
+            <marker date="1544342542156" expanded="true" signature="16123:18042" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -938,7 +1016,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.3862069" />
               </list>
             </option>
           </splitter-proportions>
@@ -950,7 +1028,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.3862069" />
               </list>
             </option>
           </splitter-proportions>
@@ -962,7 +1040,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.3862069" />
               </list>
             </option>
           </splitter-proportions>
@@ -974,7 +1052,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.3862069" />
               </list>
             </option>
           </splitter-proportions>
@@ -986,7 +1064,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.3862069" />
               </list>
             </option>
           </splitter-proportions>
@@ -1010,7 +1088,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.3862069" />
               </list>
             </option>
           </splitter-proportions>

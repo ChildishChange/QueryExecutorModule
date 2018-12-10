@@ -67,7 +67,7 @@ public class QueryEntrance extends AbstractHandler {
 
         //setup cluster
         memOnEachCore = config.getString("MEMORY");
-        int serverPort = Integer.parseInt(config.getString("PORT"));
+        int serverPort = config.getInt("PORT");
 
         //start running
         if(config.getBoolean("TESTMODE")) {
@@ -80,8 +80,8 @@ public class QueryEntrance extends AbstractHandler {
             boolean jenaFlag = true;
             boolean cachePoolFlag = false;
             String metaFile = config.getString("META");
-            concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
 
+            concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
             Query query =  ReWriteBasedOnStruct(queryString,metaFile);
             Op opRoot = Algebra.compile(query) ;
             Op opRootRewrite = (rewriteFlag)?QueryRewrting.transform(opRoot,concept,limNum):null;
@@ -95,6 +95,7 @@ public class QueryEntrance extends AbstractHandler {
                         querySparql(instances,
                                 (rewriteFlag)?opRootRewrite:opRoot));
             } else {
+                initRuntimeEnvironment(instanceFile, memOnEachCore, true, schemaFile);
                 responseJSON = generateResponseJSON((rewriteFlag)?opRootRewrite:opRoot,
                         jenaFlag,
                         runSPARQLQuery((rewriteFlag)?opRootRewrite:opRoot,
@@ -175,7 +176,7 @@ public class QueryEntrance extends AbstractHandler {
             } else {
                 instanceFile = selectedGraph.getJSONObject("INSTANCE").getString(instance);
                 currentInstanceFile = instanceFile;
-                initRuntimeEnvironment(instanceFile, memOnEachCore, true, schemaFile);
+                initRuntimeEnvironment(instanceFile, memOnEachCore, false, schemaFile);
             }
 
             String metaFile = selectedGraph.getString("META");
@@ -254,47 +255,60 @@ public class QueryEntrance extends AbstractHandler {
     }
 
     private static JSONObject generateResponseJSON(Op op, boolean jenaFlag, Object queryResults) throws Exception {
-        JSONObject responseJSON = new JSONObject();
-        ArrayList<String> resultStrings = new ArrayList<>();
-        StringBuilder resultStringBuilder = new StringBuilder();
-        List<Var> vars = ((OpProject)op).getVars();
-        responseJSON.put("Vars",vars);
-        if(queryResults == null) {
-            responseJSON.put("Results",resultStrings);
-            responseJSON.put("Count",0);
-            return responseJSON;
-        }
+        try {
 
-        if(jenaFlag) {
-            QueryIterator qIterator = (QueryIterator)queryResults;
-            for ( ; qIterator.hasNext() ; ) {
-                Binding b = qIterator.nextBinding();
-                Iterator<Var> b_var = b.vars();
-                for(;b_var.hasNext();) {
-                    Var temp = b_var.next();
-                    resultStringBuilder.append((b.get(temp).isURI()) ? "<" + b.get(temp) + ">" : b.get(temp)).append("\t");
-                }
-                if(!resultStrings.contains(resultStringBuilder.toString())) {
-                    resultStrings.add(resultStringBuilder.toString());
-                }
-                resultStringBuilder.delete(0,resultStringBuilder.length());
+
+            JSONObject responseJSON = new JSONObject();
+            ArrayList<String> resultStrings = new ArrayList<>();
+            StringBuilder resultStringBuilder = new StringBuilder();
+            List<Var> vars = ((OpProject) op).getVars();
+            ArrayList<String> varList = new ArrayList<>();
+            for(Var var : vars) {
+                varList.add(var.getVarName());
             }
-            qIterator.close();
-        } else {
-            List<SolutionMapping> solutionMappings = (List<SolutionMapping>)queryResults;
-            for(SolutionMapping solutionMapping: solutionMappings) {
-                for(Var var : vars) {
-                    resultStringBuilder.append(solutionMapping.getValueToField(var.toString())).append("\t");
-                }
-                if(!resultStrings.contains(resultStringBuilder.toString())) {
-                    resultStrings.add(resultStringBuilder.toString());
-                }
-                resultStringBuilder.delete(0,resultStringBuilder.length());
+            responseJSON.put("Vars", varList);
+
+            if (queryResults == null) {
+                responseJSON.put("Results", resultStrings);
+                responseJSON.put("Count", 0);
+                return responseJSON;
             }
+
+            if (jenaFlag) {
+                QueryIterator qIterator = (QueryIterator) queryResults;
+                for (; qIterator.hasNext(); ) {
+                    Binding b = qIterator.nextBinding();
+                    Iterator<Var> b_var = b.vars();
+                    for (; b_var.hasNext(); ) {
+                        Var temp = b_var.next();
+                        resultStringBuilder.append((b.get(temp).isURI()) ? "<" + b.get(temp) + ">" : b.get(temp)).append("\t");
+                    }
+                    if (!resultStrings.contains(resultStringBuilder.toString())) {
+                        resultStrings.add(resultStringBuilder.toString());
+                    }
+                    resultStringBuilder.delete(0, resultStringBuilder.length());
+                }
+                qIterator.close();
+            } else {
+                List<SolutionMapping> solutionMappings = (List<SolutionMapping>) queryResults;
+                for (SolutionMapping solutionMapping : solutionMappings) {
+                    for (Var var : vars) {
+                        resultStringBuilder.append(solutionMapping.getValueToField(var.toString())).append("\t");
+                    }
+                    if (!resultStrings.contains(resultStringBuilder.toString())) {
+                        resultStrings.add(resultStringBuilder.toString());
+                    }
+                    resultStringBuilder.delete(0, resultStringBuilder.length());
+                }
+            }
+            responseJSON.put("Count", resultStrings.size());
+            responseJSON.put("Results", resultStrings);
+            return responseJSON;
+        } catch(Exception e)
+        {
+            e.printStackTrace();
         }
-        responseJSON.put("Results",resultStrings);
-        responseJSON.put("Count",resultStrings.size());
-        return responseJSON;
+        return null;
     }
 
     private static Query ReWriteBasedOnStruct(String queryString, String metaData)
@@ -307,7 +321,7 @@ public class QueryEntrance extends AbstractHandler {
         JSONObject subPrp = meta.getJSONObject("subPrp");
 
         Query query = QueryFactory.create(queryString);
-        System.out.println(query);
+        //System.out.println(query);
 
         ElementGroup element = (ElementGroup) query.getQueryPattern();
         List<Triple> triplesToUnion = new ArrayList<>();
@@ -355,7 +369,7 @@ public class QueryEntrance extends AbstractHandler {
             }
         }
 
-        System.out.println("Before Structural Rewrite:"+query);
+        //System.out.println("Before Structural Rewrite:"+query);
         //替换subCls与subPrp
         for(Triple triple : triplesToUnion) {
             if(triple.getPredicate().toString().equals(RDF.type.toString())) {//替换o.subcls
@@ -392,7 +406,7 @@ public class QueryEntrance extends AbstractHandler {
                 element.addElement(eU);
             }
         }
-        System.out.println("After Structural Rewrite:"+query);
+        //System.out.println("After Structural Rewrite:"+query);
         return query;
     }
 

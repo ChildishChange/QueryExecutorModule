@@ -9,8 +9,11 @@ import de.tf.uni.freiburg.sparkrdf.parser.rdf.{LineMalformedException, RDFParser
 import de.tf.uni.freiburg.sparkrdf.run.QueryExecutor
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.FileSystem
-import org.apache.log4j.{Level, Logger}
+import org.apache.log4j.Level
+import org.apache.log4j.Logger
 import org.apache.spark._
+import org.apache.spark.internal.Logging
+
 import org.apache.spark.graphx._
 import org.apache.spark.rdd.RDD
 

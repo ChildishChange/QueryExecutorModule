@@ -8,16 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="48361e10-27f5-441a-8c3a-ad644956ebec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/model/graph/GraphLoader.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/model/graph/GraphLoader.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/ArgumentParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/S2XTQueryFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/utils/sparkactor/ClientActor.scala" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/utils/sparkactor/Greeting.scala" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/utils/sparkactor/ServerActor.scala" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/utils/sparkactor/test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/task/sparql/executor/QueryExecutor.scala" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,7 +36,7 @@
     <session id="-1379372577">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="28" />
+          <entry key="project.closed" value="30" />
           <entry key="project.open.time.10" value="2" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.13" value="4" />
@@ -54,12 +46,13 @@
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.19" value="1" />
-          <entry key="project.open.time.21" value="1" />
+          <entry key="project.open.time.21" value="2" />
+          <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="29" />
+          <entry key="project.opened" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -84,16 +77,16 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="13836" />
-          <entry key="json" value="576" />
+          <entry key="java" value="14135" />
+          <entry key="json" value="598" />
           <entry key="scala" value="141" />
           <entry key="xml" value="118" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="13836" />
-          <entry key="JSON" value="576" />
+          <entry key="JAVA" value="14135" />
+          <entry key="JSON" value="598" />
           <entry key="Scala" value="141" />
           <entry key="XML" value="118" />
         </counts>
@@ -105,56 +98,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="true" current-in-tab="false">
+      <file pinned="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
-              <caret line="408" column="10" selection-start-line="408" selection-start-column="10" selection-end-line="408" selection-end-column="10" />
+            <state relative-caret-position="156">
+              <caret line="80" column="27" lean-forward="true" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#9129#9130#0" expanded="true" />
-                <element signature="e#9183#9184#0" expanded="true" />
                 <element signature="method#initRuntimeEnvironment#0;class#QueryEntrance#0" />
                 <element signature="method#runSPARQLQuery#0;class#QueryEntrance#0" />
                 <element signature="method#generateResponseJSON#0;class#QueryEntrance#0" />
+                <element signature="method#ReWriteBasedOnStruct#0;class#QueryEntrance#0" />
                 <element signature="method#getNode#0;class#QueryEntrance#0" />
                 <element signature="method#ReadAsChars#0;class#QueryEntrance#0" />
-                <marker date="1544443856807" expanded="false" signature="2772:4281" ph="{...}" />
-                <marker date="1544443856807" expanded="true" signature="2784:3251" ph="..." />
-                <marker date="1544443856807" expanded="true" signature="6349:7417" ph="..." />
-                <marker date="1544443856807" expanded="true" signature="11731:12536" ph="{...}" />
-                <marker date="1544443856807" expanded="true" signature="11851:12487" ph="{...}" />
-                <marker date="1544443856807" expanded="true" signature="12542:13185" ph="{...}" />
-                <marker date="1544443856807" expanded="false" signature="14188:16109" ph="{...}" />
-                <marker date="1544443856807" expanded="false" signature="16247:18166" ph="{...}" />
+                <marker date="1544604571598" expanded="true" signature="3037:4110" ph="{...}" />
+                <marker date="1544604571598" expanded="true" signature="3048:3262" ph="..." />
+                <marker date="1544604571598" expanded="true" signature="10165:10861" ph="{...}" />
+                <marker date="1544604571598" expanded="true" signature="10285:10812" ph="{...}" />
+                <marker date="1544604571598" expanded="true" signature="10867:11401" ph="{...}" />
+                <marker date="1544604571598" expanded="false" signature="12404:14325" ph="{...}" />
+                <marker date="1544604571598" expanded="false" signature="14463:16382" ph="{...}" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/json/json/20180813/json-20180813.jar!/org/json/JSONObject.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7">
-              <caret line="877" column="22" selection-start-line="877" selection-start-column="22" selection-end-line="877" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.ideaLibSources/jena-arq-3.0.0-sources.jar!/org/apache/jena/sparql/algebra/Algebra.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="145" column="25" selection-start-line="145" selection-start-column="25" selection-end-line="145" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.ideaLibSources/jena-arq-3.0.0-sources.jar!/org/apache/jena/sparql/engine/Plan.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="35" column="25" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -162,17 +126,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
+            <state relative-caret-position="460">
               <caret line="76" column="37" selection-start-line="76" selection-start-column="37" selection-end-line="76" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="true" current-in-tab="true">
+      <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="2" selection-start-line="8" selection-start-column="11" selection-end-line="9" selection-end-column="2" />
+            <state relative-caret-position="133">
+              <caret line="7" column="58" selection-start-line="7" selection-start-column="58" selection-end-line="7" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -235,11 +199,11 @@
         <option value="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/TestJena.java" />
         <option value="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/parser/query/op/SparkBGP.java" />
         <option value="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/sparql/SparkFacade.scala" />
-        <option value="$PROJECT_DIR$/config.json" />
         <option value="$PROJECT_DIR$/metadata.json" />
         <option value="$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/model/graph/GraphLoader.scala" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java" />
+        <option value="$PROJECT_DIR$/config.json" />
       </list>
     </option>
   </component>
@@ -368,7 +332,7 @@
     <property name="SearchEverywhereHistoryKey" value="Op&#9;PSI&#9;JAVA://de.tf.uni.freiburg.sparkrdf.parser.query.op.SparkBGP#op" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544445354399" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544446358076" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$MAVEN_REPOSITORY$/org/json/json/20180130/json-20180130.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -468,12 +432,14 @@
       <workItem from="1544407012944" duration="5532000" />
       <workItem from="1544424609994" duration="2299000" />
       <workItem from="1544427684738" duration="4443000" />
-      <workItem from="1544433293754" duration="9436000" />
+      <workItem from="1544433293754" duration="10832000" />
+      <workItem from="1544446885789" duration="1559000" />
+      <workItem from="1544602915587" duration="1693000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="180640000" />
+    <option name="totallyTimeSpent" value="185288000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -488,7 +454,7 @@
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" x="598" y="86" width="340" height="656" id="Project" order="0" sideWeight="0.49618322" side_tool="true" visible="true" weight="0.24262735" />
+      <window_info content_ui="combo" x="598" y="86" width="340" height="656" id="Project" order="0" sideWeight="0.49618322" side_tool="true" visible="true" weight="0.24932976" />
       <window_info id="Structure" order="1" sideWeight="0.50076336" side_tool="true" weight="0.24932976" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -504,8 +470,8 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32960895" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32960895" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.37198392" side_tool="true" weight="0.3547486" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="10" visible="true" weight="0.23044693" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.42895442" side_tool="true" visible="true" weight="0.23044693" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.5710456" visible="true" weight="0.23044693" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.32960895" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.23882681" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -803,9 +769,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -835,42 +798,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
-          <folding>
-            <element signature="e#3512#3513#0" expanded="true" />
-            <element signature="e#3563#3564#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/task/sparql/executor/QueryExecutor.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3911">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/ArgumentParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="20" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/S2XTQueryFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="35" column="23" lean-forward="true" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/task/sparql/executor/QueryExecutor.scala" />
+    <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/ArgumentParser.java" />
+    <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/S2XTQueryFactory.java" />
     <entry file="file://$PROJECT_DIR$/src/de/tf/uni/freiburg/sparkrdf/model/graph/GraphLoader.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -899,10 +832,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="97">
           <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-          <folding>
-            <element signature="e#1021#1022#0" expanded="true" />
-            <element signature="e#1066#1067#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -924,10 +853,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="912">
           <caret line="86" column="32" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
-          <folding>
-            <element signature="e#2712#2713#0" expanded="true" />
-            <element signature="e#2764#2765#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -945,6 +870,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/metadata.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="64" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$USER_HOME$/.ideaLibSources/jena-arq-3.0.0-sources.jar!/org/apache/jena/sparql/engine/Plan.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -954,61 +886,52 @@
     </entry>
     <entry file="jar://$USER_HOME$/.ideaLibSources/jena-arq-3.0.0-sources.jar!/org/apache/jena/sparql/algebra/Algebra.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
+        <state relative-caret-position="460">
           <caret line="145" column="25" selection-start-line="145" selection-start-column="25" selection-end-line="145" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/metadata.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="64" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="76" column="37" selection-start-line="76" selection-start-column="37" selection-end-line="76" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/json/json/20180813/json-20180813.jar!/org/json/JSONObject.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7">
+        <state relative-caret-position="460">
           <caret line="877" column="22" selection-start-line="877" selection-start-column="22" selection-end-line="877" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="408" column="10" selection-start-line="408" selection-start-column="10" selection-end-line="408" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#9129#9130#0" expanded="true" />
-            <element signature="e#9183#9184#0" expanded="true" />
-            <element signature="method#initRuntimeEnvironment#0;class#QueryEntrance#0" />
-            <element signature="method#runSPARQLQuery#0;class#QueryEntrance#0" />
-            <element signature="method#generateResponseJSON#0;class#QueryEntrance#0" />
-            <element signature="method#getNode#0;class#QueryEntrance#0" />
-            <element signature="method#ReadAsChars#0;class#QueryEntrance#0" />
-            <marker date="1544443856807" expanded="false" signature="2772:4281" ph="{...}" />
-            <marker date="1544443856807" expanded="true" signature="2784:3251" ph="..." />
-            <marker date="1544443856807" expanded="true" signature="6349:7417" ph="..." />
-            <marker date="1544443856807" expanded="true" signature="11731:12536" ph="{...}" />
-            <marker date="1544443856807" expanded="true" signature="11851:12487" ph="{...}" />
-            <marker date="1544443856807" expanded="true" signature="12542:13185" ph="{...}" />
-            <marker date="1544443856807" expanded="false" signature="14188:16109" ph="{...}" />
-            <marker date="1544443856807" expanded="false" signature="16247:18166" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="2" selection-start-line="8" selection-start-column="11" selection-end-line="9" selection-end-column="2" />
+        <state relative-caret-position="133">
+          <caret line="7" column="58" selection-start-line="7" selection-start-column="58" selection-end-line="7" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="76" column="37" selection-start-line="76" selection-start-column="37" selection-end-line="76" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/buaa/nlsde/jianglili/query/spark/QueryEntrance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="80" column="27" lean-forward="true" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#initRuntimeEnvironment#0;class#QueryEntrance#0" />
+            <element signature="method#runSPARQLQuery#0;class#QueryEntrance#0" />
+            <element signature="method#generateResponseJSON#0;class#QueryEntrance#0" />
+            <element signature="method#ReWriteBasedOnStruct#0;class#QueryEntrance#0" />
+            <element signature="method#getNode#0;class#QueryEntrance#0" />
+            <element signature="method#ReadAsChars#0;class#QueryEntrance#0" />
+            <marker date="1544604571598" expanded="true" signature="3037:4110" ph="{...}" />
+            <marker date="1544604571598" expanded="true" signature="3048:3262" ph="..." />
+            <marker date="1544604571598" expanded="true" signature="10165:10861" ph="{...}" />
+            <marker date="1544604571598" expanded="true" signature="10285:10812" ph="{...}" />
+            <marker date="1544604571598" expanded="true" signature="10867:11401" ph="{...}" />
+            <marker date="1544604571598" expanded="false" signature="12404:14325" ph="{...}" />
+            <marker date="1544604571598" expanded="false" signature="14463:16382" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,5 +1,6 @@
 {
   "TESTMODE":false,
+  "LOCAL":true,
   "PORT":8081,
   "MEMORY":"3G",
   "INSTANCE":"C:/Users/chenyanji/Downloads/S2X_DATA/Universities_1_new.nt",

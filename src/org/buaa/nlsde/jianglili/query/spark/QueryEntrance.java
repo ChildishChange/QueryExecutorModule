@@ -44,44 +44,44 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 
 public class QueryEntrance extends AbstractHandler {
 
-    private static Concept concept = null;
-    private static String memOnEachCore;
-    private static JSONObject config;
 
-    private static String currentInstanceFile = "";
-    private static String currentSchemaFile = "";
+    private static Concept concept = null;
+    private static String metaFile;
+    private static Dataset instances;
 
     public static void main(String[] args)
             throws Exception {
         //load config from file
-        config = loadJSONFromFile(args[0]);
+        JSONObject config = loadJSONFromFile(args[0]);
         if(config==null){return;}
 
         //setup cluster
-        memOnEachCore = config.getString("MEMORY");
+        String memOnEachCore = config.getString("MEMORY");
+        String schemaFile = config.getString("SCHEMA");
+        String instanceFile = config.getString("INSTANCE");
         int serverPort = config.getInt("PORT");
+
+        metaFile = config.getString("META");
+
+        //init cluster
+        concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
+        instances = DatasetFactory.create(RDFDataMgr.loadModel(instanceFile));
+        initRuntimeEnvironment(instanceFile, memOnEachCore, config.getBoolean("LOCAL"), schemaFile);
+
 
         //start running
         if(config.getBoolean("TESTMODE")) {
-
             String queryString = config.getString("QUERY4");
-            String instanceFile = config.getString("INSTANCE");
-            String schemaFile = config.getString("SCHEMA");
             boolean rewriteFlag = false;
             int limNum = 0;
             boolean jenaFlag = true;
             boolean cachePoolFlag = false;
-            String metaFile = config.getString("META");
 
-            concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
             Query query =  ReWriteBasedOnStruct(queryString,metaFile);
             Op opRoot = Algebra.compile(query) ;
             Op opRootRewrite = (rewriteFlag)?QueryRewrting.transform(opRoot,concept,limNum):null;
@@ -89,13 +89,11 @@ public class QueryEntrance extends AbstractHandler {
             JSONObject responseJSON;
 
             if (jenaFlag) {
-                Dataset instances = DatasetFactory.create(RDFDataMgr.loadModel(instanceFile));
                 responseJSON = generateResponseJSON((rewriteFlag)?opRootRewrite:opRoot,
                         jenaFlag,
                         querySparql(instances,
                                 (rewriteFlag)?opRootRewrite:opRoot));
             } else {
-                initRuntimeEnvironment(instanceFile, memOnEachCore, true, schemaFile);
                 responseJSON = generateResponseJSON((rewriteFlag)?opRootRewrite:opRoot,
                         jenaFlag,
                         runSPARQLQuery((rewriteFlag)?opRootRewrite:opRoot,
@@ -142,11 +140,7 @@ public class QueryEntrance extends AbstractHandler {
 
             //获取主要参数
             String queryString = content.getString("query");
-            String knowledgeGraph = content.getString("graph");
-            String instance = content.getString("instance");
-            if (queryString == null ||
-                knowledgeGraph == null ||
-                instance == null) {
+            if (queryString.isEmpty() || queryString == null) {
                 httpServletResponse.setStatus(HttpStatus.ORDINAL_404_Not_Found);
                 ((Request)httpServletRequest).setHandled(true);
                 return;
@@ -158,35 +152,12 @@ public class QueryEntrance extends AbstractHandler {
             //cachePoolFlag = content.getBoolean("CACHE");
             //limNum = content.getInt("LIM");
 
-            //根据GRAPH确定使用的schema、instance、meta
-            JSONObject selectedGraph = config.getJSONObject("GRAPHS").getJSONObject(knowledgeGraph);
-            //如果更换了图谱，需要重新初始化
-            String schemaFile;
-            if(currentSchemaFile.equals(selectedGraph.getString("SCHEMA"))) {
-                schemaFile = currentSchemaFile;
-            } else {
-                schemaFile = selectedGraph.getString("SCHEMA");
-                currentSchemaFile = schemaFile;
-                concept = QueryRewrting.initSchema("file:" + schemaFile, 0);
-            }
-            //如果更换了instance，需要重新启动
-            String instanceFile;
-            if(currentInstanceFile.equals(selectedGraph.getJSONObject("INSTANCE").getString(instance))) {
-                instanceFile = currentInstanceFile;
-            } else {
-                instanceFile = selectedGraph.getJSONObject("INSTANCE").getString(instance);
-                currentInstanceFile = instanceFile;
-                initRuntimeEnvironment(instanceFile, memOnEachCore, false, schemaFile);
-            }
-
-            String metaFile = selectedGraph.getString("META");
             Query query =  ReWriteBasedOnStruct(queryString,metaFile);
             Op opRoot = Algebra.compile(query) ;
             Op opRootRewrite = (rewriteFlag)?QueryRewrting.transform(opRoot,concept,limNum):null;
 
             JSONObject responseJSON;
             if (jenaFlag) {
-                Dataset instances = DatasetFactory.create(RDFDataMgr.loadModel(instanceFile));
                 responseJSON = generateResponseJSON((rewriteFlag)?opRootRewrite:opRoot,
                                                     jenaFlag,
                                                     querySparql(instances,
@@ -256,10 +227,8 @@ public class QueryEntrance extends AbstractHandler {
 
     private static JSONObject generateResponseJSON(Op op, boolean jenaFlag, Object queryResults) throws Exception {
         try {
-
-
             JSONObject responseJSON = new JSONObject();
-            ArrayList<String> resultStrings = new ArrayList<>();
+            HashSet<String> resultStrings = new HashSet<>();
             StringBuilder resultStringBuilder = new StringBuilder();
             List<Var> vars = ((OpProject) op).getVars();
             ArrayList<String> varList = new ArrayList<>();
@@ -283,9 +252,7 @@ public class QueryEntrance extends AbstractHandler {
                         Var temp = b_var.next();
                         resultStringBuilder.append((b.get(temp).isURI()) ? "<" + b.get(temp) + ">" : b.get(temp)).append("\t");
                     }
-                    if (!resultStrings.contains(resultStringBuilder.toString())) {
-                        resultStrings.add(resultStringBuilder.toString());
-                    }
+                    resultStrings.add(resultStringBuilder.toString());
                     resultStringBuilder.delete(0, resultStringBuilder.length());
                 }
                 qIterator.close();
@@ -295,9 +262,7 @@ public class QueryEntrance extends AbstractHandler {
                     for (Var var : vars) {
                         resultStringBuilder.append(solutionMapping.getValueToField(var.toString())).append("\t");
                     }
-                    if (!resultStrings.contains(resultStringBuilder.toString())) {
-                        resultStrings.add(resultStringBuilder.toString());
-                    }
+                    resultStrings.add(resultStringBuilder.toString());
                     resultStringBuilder.delete(0, resultStringBuilder.length());
                 }
             }
